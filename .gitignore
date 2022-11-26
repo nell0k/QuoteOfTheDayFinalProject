@@ -49,3 +49,4 @@ gradle-app.setting
 .gradle/buildOutputCleanup/outputFiles.bin
 .gradle/file-system.probe
 .gradle/vcs-1/gc.properties
+*.DS_Store
