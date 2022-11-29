@@ -1,9 +1,11 @@
 package org.example;
+import java.util.List;
 
 public class Quote {
     public String q;
     public String a;
     public String h;
+    public Integer c;
 
     public Quote() {
     }
