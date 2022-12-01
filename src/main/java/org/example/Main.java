@@ -1,17 +1,31 @@
 package org.example;
 import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.example.model.Event;
+import org.example.model.InfoDataResponse;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        //user input current day and month to see the random event which was happening on the same date another year
+        Scanner userInputDay=new Scanner(System.in);
+        //add try catch in case of the wrong input type from the user
+        System.out.println("Please type what day is today");
+        Integer day=userInputDay.nextInt();
+        Scanner userInputMonth=new Scanner(System.in);
+        System.out.println("Please type what month is today");
+        Integer month= userInputMonth.nextInt();
+        //how to use this numbers in the API request to select exactly the same day and months events from the list
+
+
 
         // create a client
         HttpClient client = HttpClient.newHttpClient();
@@ -24,7 +38,7 @@ public class Main {
     //Request Quotes from a Specific Author
         // how to display list of the available authors with the link? create a arraylist?[quotes]/[author]?[random]/[author]?
         HttpRequest programmingEventRequest = HttpRequest.newBuilder(
-                        URI.create("https://today.zenquotes.io/api/1/1"))
+                        URI.create("https://today.zenquotes.io/api/"+day+"/"+month))
                 .header("accept", "application/json")
                 .build();
     /* 1.Request quotes by keyword https://zenquotes.io/api/quotes/[YOUR_API_KEY]&keyword=happiness
@@ -49,11 +63,16 @@ public class Main {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            InfoDataResponse quote =  objectMapper.readValue(jsonString, new TypeReference<InfoDataResponse>(){});
+
+            InfoDataResponse eventsOfTheDay =  objectMapper.readValue(jsonString, new TypeReference<InfoDataResponse>(){});
             //pass in the list
+            List<Event> EventsOfThisDay=eventsOfTheDay.getData().getEvents();
+            Random random= new Random();
+            Event randomEvent=EventsOfThisDay.get(random.nextInt(EventsOfThisDay.size()));
 
-
-            System.out.println("url: " + quote);
+            //System.out.println("url: " + quote);
+            String decodedEvent = StringEscapeUtils.unescapeHtml3(randomEvent.getText());
+            System.out.println(decodedEvent);
         } catch (Exception e) {
             //catching problem on the line 52, something wrong with the typeReference
             e.printStackTrace();
