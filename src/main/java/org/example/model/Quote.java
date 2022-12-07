@@ -1,7 +1,9 @@
 package org.example.model;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class Quote {
+    @JsonIgnoreProperties(value = { "h"})
     public String q;
     public String a;
     public String h;

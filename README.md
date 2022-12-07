@@ -6,3 +6,4 @@ lkjhkjh
 1. user input
 2. creating HTTPs request, calling request
 3. all the functionality with getting a response
+4. create at least one test maybe
