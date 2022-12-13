@@ -16,7 +16,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Scanner;
+
 //totally forgot where exactly are we using gradle
 public class Main {
     public static void main(String[] args) {
@@ -44,17 +44,6 @@ public class Main {
             }
 
         }
-
-        //user input current day and month to see the random event which was happening on the same date another year
-        /*Scanner userInputDay=new Scanner(System.in);
-        //add try catch in case of the wrong input type from the user
-        System.out.println("Please type what day is today");
-         day=userInputDay.nextInt();
-        Scanner userInputMonth=new Scanner(System.in);
-        System.out.println("Please type what month is today");
-         month= userInputMonth.nextInt();*/
-
-
 
         // create a client
         HttpClient clientEvent = HttpClient.newHttpClient();
