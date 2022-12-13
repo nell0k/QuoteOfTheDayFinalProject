@@ -1,16 +1,14 @@
 package org.example;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.example.model.Event;
-import org.example.model.InfoDataResponse;
-
-import org.example.model.RandomQuoteResponse;
-import org.example.model.UserInputEvent;
+import org.example.model.*;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -34,28 +32,16 @@ public class Main {
         boolean isInputSuccesfull= false;
         while (isInputSuccesfull== false){
             try {
-                userInput.takeInput();
+                IntegerAsker integerAsker =new IntegerAsker();
+                userInput.takeInput(integerAsker);
                 isInputSuccesfull = true;
-                //how to use this numbers in the API request to select exactly the same day and months events from the list
+
             }
             catch(InputMismatchException e){
-                System.out.println(e);
-                System.out.println("please enter only numbers, no other input allowed");
+                System.out.println("Input is not valid,try again");
             }
 
         }
-
-        //user input current day and month to see the random event which was happening on the same date another year
-        /*Scanner userInputDay=new Scanner(System.in);
-        //add try catch in case of the wrong input type from the user
-        System.out.println("Please type what day is today");
-         day=userInputDay.nextInt();
-        Scanner userInputMonth=new Scanner(System.in);
-        System.out.println("Please type what month is today");
-         month= userInputMonth.nextInt();*/
-
-
-
         // create a client
         HttpClient clientEvent = HttpClient.newHttpClient();
         //do we need second client for the second API?
