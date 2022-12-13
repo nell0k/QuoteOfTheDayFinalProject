@@ -30,7 +30,7 @@ public class RandomQuoteResponse {
         //objectMapperQuote.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         List<Quote> q=objectMapperQuote.readValue(jsonStringQuote, new TypeReference<List<Quote>>(){});
 
-        //System.out.println("url: " + quote);
+
 
         System.out.println(q.get(0).getQuote()+" " + q.get(0).getAuthor());
     }
